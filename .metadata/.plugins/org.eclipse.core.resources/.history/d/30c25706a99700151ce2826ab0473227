@@ -1,0 +1,194 @@
+package spider;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.json.JSONException;
+import org.json.JSONObject;
+public class sendrequest {
+
+
+
+		
+		 
+
+		 
+		    private static final String USER_AGENT = "Mozilla/5.0";
+		 
+		    private static final String GET_URL = "http://104.131.134.77/gethttp.php/";
+		 
+		    private static final String POST_URL = "http://104.131.134.77/dbconn_test.php/";
+		 
+		    private static final String POST_PARAMS = "usrname=Pankaj";
+		 
+		    public static void main(String[] args) throws IOException, JSONException {
+		 
+		        sendGET();
+		        System.out.println("GET DONE");
+		        sendjsonpost();
+		        // sendrequest("user",10);
+		        System.out.println("POST DONE");
+		    }
+		 
+		    private static void sendGET() throws IOException {
+		        URL obj = new URL(GET_URL);
+		        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		        con.setRequestMethod("GET");
+		        con.setRequestProperty("User-Agent", USER_AGENT);
+		        int responseCode = con.getResponseCode();
+		        System.out.println("GET Response Code :: " + responseCode);
+		        if (responseCode == HttpURLConnection.HTTP_OK) { // success
+		            BufferedReader in = new BufferedReader(new InputStreamReader(
+		                    con.getInputStream()));
+		            String inputLine;
+		            StringBuffer response = new StringBuffer();
+		 
+		            while ((inputLine = in.readLine()) != null) {
+		                response.append(inputLine);
+		            }
+		            in.close();
+		 
+		            // print result
+		            System.out.println(response.toString());
+		        } else {
+		            System.out.println("GET request not worked");
+		        }
+		 
+		    }
+
+		    private static int sendjsonpost() throws JSONException, IOException{
+		    	JSONObject json = new JSONObject();
+		    	json.put("someKey", "someValue");    
+
+		    	CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+
+		    	try {
+		    	    HttpPost request = new HttpPost("http://104.131.134.77/gethttp.php");
+		    	    StringEntity params = new StringEntity(json.toString());
+		    	    request.addHeader("content-type", "application/json");
+		    	    request.setEntity(params);
+		    	    httpClient.execute(request);
+		    	// handle response here...
+		    	} catch (Exception ex) {
+		    	    // handle exception here
+		    	} finally {
+		    	    httpClient.close();
+		    	}
+		        return 0;
+		    }
+		    
+		 /*   
+		    private static int sendrequest(String username, int password) throws IOException{
+		   	 InputStream result = null;
+		   	 //URL request = new URL("http://104.131.134.77/dbcon_test.php/");
+		   	URL request = new URL("http://104.131.134.77/gethttp.php/");
+		   //	 Log.v("send", "start");
+//		        Map<String,Object> params = new LinkedHashMap<String, Object>();
+//		        params.put("usrname", username);
+//		       // params.put("reply_to_thread", 10394);
+//		        params.put("age", password);
+		        StringEntity params =new StringEntity("details={\"name\":\"myname\",\"age\":\"20\"} ");
+		        StringBuilder postData = new StringBuilder();
+//		        for (Map.Entry<String,Object> param : params.entrySet()) {
+//		            if (postData.length() != 0) postData.append(',');
+//		            postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+//		            postData.append(':');
+//		            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+//		        }
+//		        byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+//		        (HttpURLConnection)reques
+		        HttpURLConnection conn = (HttpURLConnection)request.openConnection();
+		       
+		        conn.setRequestMethod("POST");
+		        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		        conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+		        conn.setDoOutput(true);
+		        conn.getOutputStream().write(postDataBytes);
+		        result = conn.getInputStream();
+		        if(result.toString().isEmpty()){return -1;}
+		        else{
+		        	String temp = readIt(result,300);
+		        	System.out.println(temp.toString());
+		        }
+		        return 0;
+		    }
+		 */   
+		    public static String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
+			    Reader reader = null;
+			    reader = new InputStreamReader(stream, "UTF-8"); 
+			  
+			    
+			    char[] buffer = new char[len];
+			    reader.read(buffer);
+//			    Log.e("read", reader.read(buffer)+"");
+			    return new String(buffer);
+			}
+		    private static void sendPOST() throws IOException {
+		        URL obj = new URL(POST_URL);
+		        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		        con.setRequestMethod("POST");
+		        con.setRequestProperty("User-Agent", USER_AGENT);
+		 
+		        // For POST only - START
+		        con.setDoOutput(true);
+		        OutputStream os = con.getOutputStream();
+		        os.write(POST_PARAMS.getBytes());
+		        os.flush();
+		        os.close();
+		        // For POST only - END
+		 
+		        int responseCode = con.getResponseCode();
+		        System.out.println("POST Response Code :: " + responseCode);
+		 
+		        if (responseCode == HttpURLConnection.HTTP_OK) { //success
+		            BufferedReader in = new BufferedReader(new InputStreamReader(
+		                    con.getInputStream()));
+		            String inputLine;
+		            StringBuffer response = new StringBuffer();
+		 
+		            while ((inputLine = in.readLine()) != null) {
+		                response.append(inputLine);
+		            }
+		            in.close();
+		 
+		            // print result
+		            System.out.println(response.toString());
+		        } else {
+		            System.out.println("POST request not worked");
+		        }
+		    }
+
+
+
+}

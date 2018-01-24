@@ -1,0 +1,36 @@
+package spider;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+public class splitzone {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+	//	String domainName = "google.com";
+		String everything="";
+		BufferedReader br = new BufferedReader(new FileReader("name_zone.txt"));
+	    try {
+	        StringBuilder sb = new StringBuilder();
+	        String line = br.readLine();
+
+	        while (line != null) {
+	            sb.append(line);
+	            sb.append(System.lineSeparator());
+	            line = br.readLine();
+	        }
+	        everything = sb.toString();
+	    } finally {
+	        br.close();
+	    }
+
+		
+		
+	}
+
+}

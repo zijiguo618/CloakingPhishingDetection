@@ -1,0 +1,132 @@
+package chatroom;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.RemoteRef;
+import java.util.ArrayList;
+
+import chatroom.chatserver;
+
+public class chatserver_driver{
+	private static ArrayList<information> infolists;
+	public static void main(String[] args) throws InterruptedException, IOException, NotBoundException {
+		// TODO Auto-generated method stub
+
+		BufferedReader dataIn = new BufferedReader (new InputStreamReader(System.in)); 
+		String strChoice; 
+		String temp = "localhost";
+		chatserver server = new chatserver("chatserver","root");
+		Registry registry = LocateRegistry.getRegistry();
+		
+		if(args.length>=1){
+			temp = args[0];
+		}
+		int choice=0; 
+		System.setProperty("java.rmi.server.hostname","192.");
+		infolists = new ArrayList<information>();
+		RemoteRef location = server.getRef();
+		System.out.println(location.remoteToString());
+		
+		try {      
+	//		System.out.println("chatserverdriver naming");
+		
+			Naming.rebind("RMIchatserver", server);
+			//registry.rebind("RMIchatserver", server);
+			String chatserverurl = "rmi://"+temp+"/RMIchatserver";
+//			System.out.println("chatclientdriver naming");    
+			chatserver_IF chatserver = (chatserver_IF)registry.lookup("RMIchatserver");
+			// System.out.println("chatclientdriver naming"+chatserver.getroomname());
+//		    	//	
+			while(choice!=5)
+			{
+				//menu for registration
+		    	System.out.println("Menu:"); 
+		    	System.out.println("\t1.Register"); 
+		    	System.out.println("\t2.Un Register"); 
+		       	System.out.println("\t3.List of Chat Rooms"); 
+		       	System.out.println("\t4.Inoformation");
+		       	System.out.println("\t5.Quit"); 
+		       	System.out.print("Enter your choice :");  
+		       	strChoice = dataIn.readLine(); 
+		       	choice = Integer.parseInt(strChoice); 
+		 
+		       	switch (choice)
+		       	{
+		       		
+		       		case 1: //register the chatroom with name and information
+		       			
+		       			System.out.print("Enter Room name : "); 
+		       			String name = dataIn.readLine(); 
+		       			System.out.print("Enter Information : "); 
+		       			String info = dataIn.readLine(); 
+		       			information infotemp = new information(name,info);
+		       			chatserver.register(name, info);
+		       			infolists.add(infotemp);
+		       			break; 
+		       		case 2: //unregister the selected chatroom, if not exsisted the system would list the current chatrooms
+		       			System.out.print("Enter Room name : "); 
+		       			name = dataIn.readLine(); 
+		       			if(infolists.remove(IndexOflist(name)) != null){
+		       			chatserver.unregister(name);}
+		       			else {
+		       				System.out.println("cannot find the chatroom, please re-enter the name\n following are the current chatrooms"+chatserver.getroomname().toString());
+		       			}
+		       			break; 
+
+		          case 3://Show the list of Chat rooms
+		        	  System.out.println("\nList of Chat rooms"); 
+		        	  System.out.println("\t" + chatserver.getroomname().toString()); 
+		        	  break; 
+
+		          case 4://lis the Information of the selected Chatroom
+		        	  System.out.print("Enter Room name : "); 
+		        	  name = dataIn.readLine(); 
+		        	  String m =  infolists.get(IndexOflist(name)).getinfo().toString();
+		        	  System.out.println("Information of Room " +name + ": " + m);  
+		        	  break; 
+		          case 5: //exit the program
+		        	  chatserver.reset();
+		        	  System.out.println("rooms:"+chatserver.getroomname().toString()); 
+		        	  System.exit(0);
+		          default :
+		        	  System.out.println("Invalid response"); 
+		          
+		        }
+			}
+
+		}
+
+		catch (NumberFormatException e)
+		{
+			System.out.println("Invalid response/choice" + e.getMessage()); 
+		}
+	} 
+	
+	
+	public static int IndexOflist(String name){
+		int i=0;
+//		System.out.println("remove begin--- list size:"+infolists.size());
+		while(i<infolists.size()){
+//			System.out.println("list's name:"+infolists.get(i).getname()+" target:"+(name));
+			if(infolists.get(i).getname().equals(name)){
+				System.out.println("remove from infolists successful");
+				return i;
+			}
+			else{
+				i++;
+			}
+		}
+		System.out.println("remove from infolists failed");
+		return -1;
+	}
+	public ArrayList<information> getlists(){
+		return infolists;
+	}
+
+}

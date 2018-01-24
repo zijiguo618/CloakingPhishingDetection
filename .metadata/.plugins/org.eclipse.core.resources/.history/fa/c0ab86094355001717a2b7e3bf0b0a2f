@@ -1,0 +1,30 @@
+package jsexa;
+
+import java.io.File;
+
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+
+public class googlesearch {
+	public void openFF() throws InterruptedException{
+//		WebDriver driver = new FirefoxDriver();
+		System.setProperty("webdriver.firefox.bin", "/Applications/TorBrowser.app/Contents/MacOS/firefox");
+        //Launch the Online Store Website
+//		driver.get("http://www.store.demoqa.com");
+		String torPath = "/Applications/TorBrowser.app/Contents/MacOS/firefox";
+		String profilePath = "/Users/zijiguo/Library/Application Support/Firefox/Profiles/ziji_tor_profile";
+		FirefoxProfile profile = new FirefoxProfile(new File(profilePath));
+		FirefoxBinary binary = new FirefoxBinary(new File(torPath));
+		FirefoxDriver driver = new FirefoxDriver(binary, profile);
+		driver.get("http://whatismyipaddress.com/");
+        // Print a Log In message to the screen
+        System.out.println("Successfully opened the website www.Store.Demoqa.com");
+//        WebElement  btn = driver.findElement(By.id("submitButton"));//Locating element by id
+		//Wait for 5 Sec
+		Thread.sleep(5000);
+		
+        // Close the driver
+//        driver.quit();
+	}
+}

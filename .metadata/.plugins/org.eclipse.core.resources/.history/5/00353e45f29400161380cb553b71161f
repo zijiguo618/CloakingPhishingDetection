@@ -1,0 +1,32 @@
+package jsexa;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+public class findrealurl {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		
+	
+		File in = new File("baidurealurl.html");
+		Document doc = Jsoup.parse(in, null);
+		
+		// String url ="http://www.baidu.com/link?url=AiccoocR4RNt4PgZKHdyI3WWM91z_N_W4SHB0FrtiZLR574flWlSnJVUnQsUme3OL4nTReP3oXER25LHXFSyFq";
+	        //String url ="https://www.iastate.edu";
+			//Document doc = Jsoup.connect(url).userAgent("chrome").timeout(5000).get();
+			System.out.println(doc.html());
+			
+			String Tittle = doc.select("meta").get(0).attr("content");
+			System.out.println("element:\n"+Tittle);
+			Tittle.substring(7, Tittle.length()-1);
+	}
+
+}

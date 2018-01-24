@@ -1,0 +1,17 @@
+package jsexa;
+
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+public class findrealurl {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		 String url ="http://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd=zijiguo";
+	        //String url ="https://www.iastate.edu";
+			Document doc = Jsoup.connect(url).userAgent("chrome").timeout(5000).get();
+	}
+
+}

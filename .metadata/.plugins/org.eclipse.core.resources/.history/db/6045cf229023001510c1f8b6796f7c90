@@ -1,0 +1,33 @@
+package xinxin;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class v1 {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		String s=scan.nextLine();
+		  	if(s.length()<2) System.out.println( s.length());
+		   Map <Character, Integer> hash = new HashMap();
+		   int length=s.length();
+		   int max=1,end = 1,start = 0;
+
+		   hash.put(s.charAt(0),0);
+		   while(end<length){
+		     if(hash.containsKey(s.charAt(end))&&hash.get(s.charAt(end))>=start){
+		         //s.charAt(end))>=start keep start not backforward
+		         //or abba＝3
+		         start = hash.get(s.charAt(end))+1;
+		     }
+		     max = Math.max(max,end-start+1);
+		     hash.put(s.charAt(end),end);
+		     end++; 
+		   } 
+		   System.out.println(max);
+
+		    
+		
+	}
+}

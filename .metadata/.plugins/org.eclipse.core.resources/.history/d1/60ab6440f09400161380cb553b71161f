@@ -1,0 +1,18 @@
+package jsexa;
+
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+public class findrealurl {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		 String url ="http://www.baidu.com/link?url=JooJaBZfmpm3o5u2D7n-3wvLXUYzcUIB31Aqu-A7_Wh_oMuZLP5KjG-J4zOSCrnZlTKyHOe9QfMVpQLQbwc2exxbwlF7n2Ap2RqOunDlnFFk9ZOvmetY3kinJxO90ENchttp://www.baidu.com/link?url=R9Gsk-ibAlF1YyqWOvm_cxqXY1QVmJ8KhnvhWTmNcWjPQ6E97_7FI48qUpJFfrxZugZQQ0KZADAY8IZ0ejRIQK";
+	        //String url ="https://www.iastate.edu";
+			Document doc = Jsoup.connect(url).userAgent("chrome").timeout(5000).get();
+			System.out.println(doc.html());
+	}
+
+}

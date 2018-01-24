@@ -1,0 +1,54 @@
+package jsexa;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+public class test {
+	
+	public static void main(String[] args) throws Exception {
+        //String url = "https://www.google.com/#q=ziji";
+        String url ="http://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd=zijiguo";
+        //String url ="https://www.iastate.edu";
+		Document doc = Jsoup.connect(url).get();
+		
+//		String question = document.select("#question .post-text").text();
+//        System.out.println("Question: " + question);
+
+//        Elements answerers = doc.select("a[href]");
+//        for (Element answerer : answerers) {
+//            System.out.println("Answerer: " + answerer.attr("href"));
+//        }
+       // System.out.println(doc.html());  
+		System.out.println(doc.title());
+//		String keywords = doc.select("#content_left").text();//.attr("href");
+		
+//find title		
+		System.out.println("\n\n");
+		Elements Tittle = doc.select("#content_left .result\20c-container");
+		for (Element link : Tittle) {
+          System.out.println("Tittle: " + link.getElementsByClass("t").text());
+      }
+//tittle and site
+//		Elements site = doc.select("#content_left .t");
+//		for (Element link : site) {
+//          System.out.println("Tittle: " + link.text());
+//         // System.out.println("site: " +link.getElementsByAttribute("href"));
+//          String tempsite = link.getElementsByTag("a").attr("href");
+//          System.out.println("site: " +tempsite);
+//      }
+//find abstract
+//		System.out.println("\n\n");
+//		Elements abstracts = doc.select("#content_left .c-abstract");
+//		for (Element link : abstracts) {
+//          System.out.println("abstract: " + link.text());
+//      }
+		
+		//System.out.println(keywords);
+        //String keywords = doc.select(".isu-Feature-content .block-list").text();//.attr("href");
+        //System.out.println("Meta keyword : " + keywords);  
+//        String description = doc.select("meta[name=description]").get(0).attr("content");  
+//        System.out.println("Meta description : " + description);  
+    }
+}

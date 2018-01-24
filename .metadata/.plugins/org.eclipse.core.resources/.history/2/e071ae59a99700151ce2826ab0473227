@@ -1,0 +1,58 @@
+package spider;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+public class splitzone {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+	//	String domainName = "google.com";
+		String everything="";
+		BufferedReader br = new BufferedReader(new FileReader("phishingdomains.txt"));
+	    try {
+	        StringBuilder sb = new StringBuilder();
+	        String line = br.readLine();
+	        while (line != null) {
+	        	//line = line.substring(0, line.indexOf("in"));\
+	        	int cut =0;
+	        	cut = line.indexOf("/", 10);
+	        	//line.indexOf(7, "/");
+	        	//System.out.println(cut);
+	       if(cut!=-1){
+	        		line = line.substring(0, cut);
+	        		System.out.println(line.substring(0, cut));
+	        		}
+	        //	line = line.substring(cut);}
+	        	sb.append(line);
+	            sb.append(System.lineSeparator());
+	            //System.out.println(line);
+	            line = br.readLine();
+	        }
+	        everything = sb.toString();
+	    } finally {
+	        br.close();
+	    }
+	    //System.out.println(everything);
+	    try {
+	    	 
+			FileWriter file = new FileWriter("cutted_phishingdomains_30.txt");
+			file.write(everything);
+			file.flush();
+			file.close();
+	 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	    
+		
+	}
+
+}

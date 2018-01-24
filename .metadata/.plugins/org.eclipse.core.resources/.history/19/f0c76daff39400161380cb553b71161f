@@ -1,0 +1,46 @@
+package jsexa;
+
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+public class test {
+	
+	public static void main(String[] args) throws Exception {
+        //String url = "https://www.google.com/#q=ziji";
+        String url ="http://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd=zijiguo";
+        //String url ="https://www.iastate.edu";
+		Document doc = Jsoup.connect(url).userAgent("chrome").timeout(5000).get();
+		Document doc1 ;
+		System.out.println(doc.title());
+		System.out.println("\n\n");
+		int index =0;
+		for (;index<10;index++) {
+			System.out.println(index);
+			String tempurl=doc.select("#content_left .t").get(index).getElementsByTag("a").attr("href");
+			System.out.println("tittle: " + doc.select("#content_left .t").get(index).text());
+			System.out.println("site: " + findrealurl(tempurl));
+			System.out.println("abstract: " + doc.select("#content_left div#"+(index+1)+".c-container").text());
+			
+//          
+		}
+
+
+    }
+	
+	public static String findrealurl(String url) throws IOException{
+			Document doc = Jsoup.connect(url).userAgent("chrome").timeout(5000).get();
+			String Tittle = doc.select("meta").get(0).attr("content");
+			return Tittle.substring(7, Tittle.length()-1);
+	}
+	public static String findrealabstract(String str, int index){
+		
+		
+		
+		return null;
+	}
+	
+}

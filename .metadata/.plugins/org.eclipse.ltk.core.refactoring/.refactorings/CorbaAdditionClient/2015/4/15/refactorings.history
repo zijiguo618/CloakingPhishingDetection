@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;CorbaAdditionClient&apos;&#x0A;- Original project: &apos;CorbaAdditionClient&apos;&#x0A;- Original element: &apos;CorbaAdditionClient/src/AdditionApp&apos;" description="Delete element" element1="/src&lt;AdditionApp" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1428358815732" subPackages="false" version="1.0"/>
+</session>

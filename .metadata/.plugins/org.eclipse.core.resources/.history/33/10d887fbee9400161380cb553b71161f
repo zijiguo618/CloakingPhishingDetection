@@ -1,0 +1,83 @@
+package jsexa;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+public class test {
+	
+	public static void main(String[] args) throws Exception {
+        //String url = "https://www.google.com/#q=ziji";
+        String url ="http://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd=zijiguo";
+        //String url ="https://www.iastate.edu";
+		Document doc = Jsoup.connect(url).userAgent("chrome").timeout(5000).get();
+		
+//		String question = document.select("#question .post-text").text();
+//        System.out.println("Question: " + question);
+
+//        Elements answerers = doc.select("a[href]");
+//        for (Element answerer : answerers) {
+//            System.out.println("Answerer: " + answerer.attr("href"));
+//        }
+//        System.out.println(doc.html());  
+		System.out.println(doc.title());
+//		String keywords = doc.select("#content_left").text();//.attr("href");
+		
+//find abstract		
+		System.out.println("\n\n");
+		Elements Tittle = doc.select("#content_left div#1.c-container");
+//		int index =0;
+		Element t1 = doc.select("#content_left div#2.result-op").get(0);
+		int index =0;
+		for (;index<10;index++) {
+			//System.out.println(link.text());
+			System.out.println("abstract: " + doc.select("#content_left div#"+(index+1)+".c-container").text());
+			System.out.println("site: " + doc.select("#content_left .t").get(index).getElementsByTag("a").attr("href"));
+          System.out.println("tittle: " + doc.select("#content_left .t").get(index).text());
+//          
+		}
+		
+		
+//		for (index =0;index<Tittle.size();index++) {
+//          System.out.println("Tittle: " + t1.getElementsByClass("t").get(index).text());
+////          if(!t1.hasClass("c-abstract")){
+////        	  System.out.println(Tittle.size() +"    "+index);
+////        	  continue;
+////          }
+//          System.out.println("site: " + t1.getElementsByClass("t").get(index).getElementsByTag("a").attr("href"));
+//          System.out.println("abstract: " + t1.getElementsByClass("c-abstract").get(index).text());
+//          
+//          System.out.println(Tittle.size() +"    "+index);
+//      }
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//tittle and site
+//		Elements site = doc.select("#content_left .t");
+//		for (Element link : site) {
+//          System.out.println("Tittle: " + link.text());
+//         // System.out.println("site: " +link.getElementsByAttribute("href"));
+//          String tempsite = link.getElementsByTag("a").attr("href");
+//          System.out.println("site: " +tempsite);
+//      }
+//find abstract
+//		System.out.println("\n\n");
+//		Elements abstracts = doc.select("#content_left .c-abstract");
+//		for (Element link : abstracts) {
+//          System.out.println("abstract: " + link.text());
+//      }
+		
+		//System.out.println(keywords);
+        //String keywords = doc.select(".isu-Feature-content .block-list").text();//.attr("href");
+        //System.out.println("Meta keyword : " + keywords);  
+//        String description = doc.select("meta[name=description]").get(0).attr("content");  
+//        System.out.println("Meta description : " + description);  
+    }
+}

@@ -1,0 +1,81 @@
+package xinxin;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class v1 {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		//String s=scan.nextLine();
+		int[] nums1 = {};
+		int[] nums2 = {1};
+		 	int l1 = nums1.length;
+	        int l2 = nums2.length;
+	        int p1=0;
+	        int p2=0;
+	        double answer=0;
+	        int[] resu = new int[l1+l2];
+	        boolean even =false;
+	        if((l1+l2)%2==0){
+	            even=true;
+	        }
+	        while(p1!=l1||p2!=l2){
+	        	System.out.println("while");
+	            if(l1==0||l2==0){
+	                if(l1==0){
+	                    resu=nums2;
+	                    //System.out.println("l1=0 nums2:"+nums2+" resu:"+resu);
+	                    break;
+	                }
+	                if(l2==0){
+	                    resu =nums1;
+	                    System.out.println("l2=0 nums1:"+nums1+" resu:"+resu);
+	                    break;
+	                }
+	                if(l1==0&&l2==0){
+	                    break;
+	                }
+	            }
+	            else {
+	                if(p1==l1){
+	                    resu[p1+p2] = nums2[p2];
+	                    p2++;
+	                }
+	                else if(p2==l2){
+	                    resu[p1+p2] = nums1[p1];
+	                    p1++;
+	                }
+	                else if(nums1[p1]>nums2[p2]){
+	                    resu[p1+p2] = nums1[p1];
+	                    p1++;
+	                }
+	                else if(nums1[p1]==nums2[p2]){
+	                    resu[p1+p2]=nums1[p1];
+	                    resu[p1+p2+1] = nums2[p2];
+	                    p1++;
+	                    p2++;
+	                }else {
+	                    resu[p1+p2] = nums2[p2];
+	                    p2++;
+	                }
+	            }
+	        }
+	        if(l1+l2==0){
+	            answer=0;
+	        }else if(l1+l2<=2){
+	            answer = resu[0];
+	        }
+	        else{
+	            if(even){
+	                answer = resu[(l1+l2)/2-1]+resu[(l1+l2)/2];
+	                answer = answer/2.0;
+	            }
+	            else{
+	                answer =resu[(l1+l2)/2];
+	            }
+	        }
+		System.out.println(answer);
+	}
+}

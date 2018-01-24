@@ -1,0 +1,59 @@
+package jsexa;
+
+import java.io.File;
+import java.sql.Statement;
+import java.util.List;
+
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+
+public class googlesearch {
+	public void openFF() throws InterruptedException{
+//		WebDriver driver = new FirefoxDriver();
+		System.setProperty("webdriver.firefox.bin", "/Applications/TorBrowser.app/Contents/MacOS/firefox");
+        //Launch the Online Store Website
+//		driver.get("http://www.store.demoqa.com");
+		String torPath = "/Applications/TorBrowser.app/Contents/MacOS/firefox";
+		String profilePath = "/Users/zijiguo/Library/Application Support/Firefox/Profiles/ziji_tor_profile";
+		FirefoxProfile profile = new FirefoxProfile(new File(profilePath));
+		FirefoxBinary binary = new FirefoxBinary(new File(torPath));
+		FirefoxDriver driver = new FirefoxDriver(binary, profile);
+		driver.get("http://whatismyipaddress.com/");
+        // Print a Log In message to the screen
+        System.out.println("Successfully opened the website www.Store.Demoqa.com");
+        List<WebElement> class_g= driver.findElements(By.tagName("g"));
+        String title,site,abstracts="";
+        for(WebElement el : class_g)
+    	{
+    	// el.getElementsByTag("h3").text()
+        	
+    		System.out.println("Title : " + el.findElement(By.tagName("h3")).getText());
+    		 title = el.findElement(By.tagName("h3")).getText();
+    		 //el.getElementsByTag("cite").text().toString()
+    		 site =  el.findElement(By.tagName("cite")).getText();
+    		 //el.getElementsByTag("span").text().toString();
+    		 abstracts= el.findElement(By.tagName("span")).getText();
+    		System.out.println("Site : " + site);
+    		driver.get(site);
+    		abstracts = abstracts.replaceAll("\"", "");
+    		html  = html.replaceAll("\"", "");
+    		System.out.println("Abstract : " + abstracts + "\n");
+    		//System.out.println(html);
+    		st1.executeUpdate("INSERT INTO Google(keyword_Id,Keyword,Tittle,site,abstract,html) " + 
+    		        "VALUES ((SELECT Keyword_ID from Keyword where Keyword=\""+initialkeyword+"\"),\""+keyword+"\",\""+title+"\",\""+site+"\",\""+abstracts+"\",\""+html+"\")  "); 
+    		
+    	}
+        driver.findElementByTagName(using);
+//        WebElement  btn = driver.findElement(By.id("submitButton"));//Locating element by id
+		//Wait for 5 Sec
+		Thread.sleep(5000);
+		
+        // Close the driver
+//        driver.quit();
+	}
+}

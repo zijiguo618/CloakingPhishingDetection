@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;xinxin&apos; to &apos;gg&apos;&#x0A;- Original project: &apos;gg&apos;&#x0A;- Original element: &apos;gg/src/xinxin&apos;&#x0A;- Renamed element: &apos;gg/src/gg&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;xinxin&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;xinxin" name="gg" qualified="false" references="true" stamp="1483564866166" textual="false" version="1.0"/>
+</session>

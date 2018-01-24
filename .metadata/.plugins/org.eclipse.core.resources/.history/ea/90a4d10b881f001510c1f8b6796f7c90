@@ -1,0 +1,13 @@
+package xinxin;
+
+public class v1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int i =12345;
+		int l =54321;
+		int result = i>l?1:2;
+		System.out.println(result);
+		
+	}
+}

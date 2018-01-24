@@ -1,0 +1,28 @@
+package xinxin;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class v1 {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		String s=scan.nextLine();
+		if(s.length()<2) System.out.print(s.length()); 
+        int i=0;
+        String temp="";
+        int max=0;
+        while(i<s.length()){
+            if(temp.contains(s.charAt(i)+"")){
+                max = Math.max(temp.length(),max);
+                temp = "";
+            }
+            else{
+                temp+=s.charAt(i);
+            }
+            i++;
+        }
+		System.out.println(max);
+	}
+}

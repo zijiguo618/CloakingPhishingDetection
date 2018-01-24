@@ -1,0 +1,10 @@
+package jsexa;
+
+public class findrealurl {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

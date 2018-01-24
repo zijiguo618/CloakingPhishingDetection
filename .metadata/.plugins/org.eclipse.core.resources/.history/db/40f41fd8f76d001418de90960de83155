@@ -1,0 +1,67 @@
+/*
+ * Section A. Import libraries
+ */
+import java.io.File;
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+class Dom_Demo {
+
+	public static void main(String args[]) throws SAXException, IOException, ParserConfigurationException{
+/*
+ * Section B. Not applicable
+ */
+		
+/*
+ * Section C. Initialize and build Document from a xml file	
+ */
+		
+	File auction = new File ("auctions(1).xml");
+	
+	long time =System.currentTimeMillis();
+	Document queryDoc =
+		DocumentBuilderFactory.newInstance()
+			.newDocumentBuilder()
+				.parse(auction);
+/*
+ * Section D. Create a nodeList that contains all the person nodes
+ */
+	NodeList personList = queryDoc.getElementsByTagName("person");
+	/*
+     * Section D.1. we can start with the first person node 
+     * and call getNextSibling() to iterate the person tree
+     */
+	Node person = personList.item(0);
+	while(person !=null)
+    {
+ 	   Node name = person.getFirstChild();
+ 	   if (name !=null)
+ 		   System.out.println(name.getFirstChild().getNodeValue().trim());
+ 	   person = (Element) person.getNextSibling();
+    }
+	 System.out.println();
+	 System.out.println("Time taken: "+(System.currentTimeMillis()-time));
+	/*
+     * Section D.2 Or we can go through the person tree by calling the index
+     */
+	/*for(int i=0;i<personList.getLength();i++)
+	{
+		
+		Element p = (Element)personList.item(i);
+		Node name = p.getFirstChild();
+			if(name!=null)
+				System.out.println(name.getFirstChild().getNodeValue().trim());
+		
+	}
+				*/
+	
+	}
+}

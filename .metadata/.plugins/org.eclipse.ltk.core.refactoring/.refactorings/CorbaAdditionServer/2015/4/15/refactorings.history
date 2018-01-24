@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;AdditionApp&apos; to &apos;CorbaAdditionClient/src&apos;&#x0A;- Original project: &apos;CorbaAdditionServer&apos;&#x0A;- Destination element: &apos;CorbaAdditionClient/src&apos;&#x0A;- Original element: &apos;CorbaAdditionServer/src/AdditionApp&apos;" description="Copy package" destination="=CorbaAdditionClient/src" element1="/src&lt;AdditionApp" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1428358820560" version="1.0"/>
+</session>
